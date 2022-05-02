@@ -44,8 +44,7 @@ async function run() {
             const query = {_id: ObjectId(id)};
             const inventory = await bookCollection.findOne(query);
             res.send(inventory)
-            console.log(req.params)
-            res.send('finding user')
+            
         })
       })
      
