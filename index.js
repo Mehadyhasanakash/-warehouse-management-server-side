@@ -31,22 +31,41 @@ async function run() {
     try {
       await client.connect();
       const bookCollection = client.db('Book').collection('item')
+      
+      // all inventory item
 
       app.get('/inventory', async (req, res) =>{
           const query ={}
           const cursor = bookCollection.find(query)
             const inventory = await cursor.toArray()
             res.send(inventory)
+          })
 
+        // inventoryid item
 
         app.get('/inventory/:id', async(req, res) =>{
             const id = req.params.id;
             const query = {_id: ObjectId(id)};
             const inventory = await bookCollection.findOne(query);
             res.send(inventory)
+          })
+
+
+// post item
+            app.post('/inventory', async (req, res) => {
+
+
+              const inventory = req.body;
+              console.log('add a new user', inventory)
+              
+              res.send('user data received')
+
+
+
+            })
             
-        })
-      })
+        
+      
      
     } 
     
