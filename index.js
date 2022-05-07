@@ -58,10 +58,20 @@ async function run() {
               const inventory = req.body;
               console.log('add a new user', inventory)
               
-              res.send('user data received')
+              const result = await bookCollection.insertOne(inventory)
+              
+              res.send(result)
 
 
 
+            })
+
+            // delete item
+            app.delete('/inventory/:id', async(req, res) =>{
+              const id = req.params.id;
+              const query = {_id: ObjectId(id)};
+              const result = await bookCollection.deleteOne(query);
+              res.send(result);
             })
             
         
