@@ -73,6 +73,26 @@ async function run() {
               const result = await bookCollection.deleteOne(query);
               res.send(result);
             })
+
+            // put item
+            
+            app.put('/inventory/:id', async(req, res) => {
+              const id = req.params.id;
+              console.log(id)
+              const updateInventory = req.body;
+               const filter = {_id: ObjectId(id)};
+              const options = { upsert: true };
+
+              const updateDoc = {
+                $set: {
+                  quantity: updateInventory.result
+                }
+              };
+              const result = await bookCollection.updateOne(filter, updateDoc, options)
+              res.send(result)
+
+              
+            })
             
         
       
